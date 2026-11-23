@@ -18,6 +18,52 @@ A single Hermes skill, `chat-rich-media`, that teaches an agent:
 - **how** to verify the result — measure it, resize it, click it — instead of shipping a screenshot and
   hoping.
 
+## Examples
+
+Three answers built with this skill, screenshotted from real sessions. Copy the **structure**; the copy in
+them is illustrative. Each is one HTML file plus one `::preview{file="/abs/path.html"}` directive.
+
+### 1. A company note — two listed companies behind one hotpot chain
+
+<img src="docs/examples/01-company-note.png" width="760" alt="Company note widget: KPI strip, tab bar, two licensed photo tiles, two company cards, one-line summary and sources">
+
+Opens with four KPI cards (revenue, store count, supplier revenue, related-party share) — the numbers that
+decide whether the rest is worth reading. Then a tab bar carries four readings (overview / relationship
+graph / financials / timeline) so one answer does not become four screens of scroll. The photo tiles are
+evidence of *place*, captioned and licence-labelled, not decoration. Two company cards hold revenue, profit,
+half-year figures and the one operational detail that explains the split; a single bold line states the
+argument in a sentence, and the footnote gives the data basis, image licences and the not-advice caveat.
+
+Worth copying: KPI-first hierarchy · tabs instead of a long scroll · every number with a unit and a period ·
+a footer that says where the numbers came from.
+
+### 2. Five ways a network can be wired
+
+<img src="docs/examples/02-topologies.png" width="760" alt="Topology grid: five SVG shapes with one selected, a strengths/costs panel, and a comparison table with the matching row highlighted">
+
+Five hand-drawn SVG shapes, one selected. The panel underneath explains the selection in two columns
+(strengths / costs), and the comparison table keeps every option on screen with the selected row
+highlighted. Clicking a shape changes all three at once — shape, panel, table row.
+
+Worth copying: selection instead of enumeration · the table stays as the scan surface while the detail
+explains · shapes drawn at `viewBox="0 0 120 66"` in `currentColor` so they follow the theme.
+
+This one is `templates/diagram-grid.html` filled in.
+
+### 3. A concept's history as a mind map
+
+<img src="docs/examples/03-history-mindmap.png" width="760" alt="Mind map: root card, dated branch cards on a vertical rail, and a colour-coded timeline strip across the top">
+
+A topic that is both chronological and thematic: the root sits in the middle, a vertical rail carries the
+periods, and each branch card argues one phase — prehistory, naming, regulation. The strip across the top is
+a timeline that doubles as a legend, so the reader gets the shape before reading a word.
+
+Worth copying: when time *and* argument both matter, put time on the rail and the argument in the cards ·
+colour-code the categories once, then reuse the same hue in the legend and the dots.
+
+The subject is a sensitive social topic, so the answer is text and structure only — no decorative imagery,
+which is the rule for legal, medical and grief topics too.
+
 ## Install
 
 ```bash
@@ -53,6 +99,8 @@ skills/chat-rich-media/
 
 Templates are skeletons, not demos: they render standalone with placeholder blocks, and carry `TODO`
 comments where the content goes. Copy one, replace the copy, keep the layout.
+
+`docs/examples/` holds the screenshots used in the section above.
 
 ## Design constraints that matter
 
