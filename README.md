@@ -21,10 +21,19 @@ A single Hermes skill, `chat-rich-media`, that teaches an agent:
 ## Install
 
 ```bash
+# canonical: through the Skills Hub
 hermes skills install Tangtangchannel/hermes-visualization/skills/chat-rich-media
 ```
 
-Or copy `skills/chat-rich-media/` into `$HERMES_HOME/skills/`.
+No hub, no network, or a proxy that the guard refuses (a fake-IP range such as `198.18.0.0/15` makes the
+hub client treat `api.github.com` as an internal address and refuse it) — clone and copy instead:
+
+```bash
+git clone https://github.com/Tangtangchannel/hermes-visualization.git
+cp -r hermes-visualization/skills/chat-rich-media "$HERMES_HOME/skills/"
+```
+
+Then load it with `skill_view(name="chat-rich-media")` in any session.
 
 ## Layout
 
