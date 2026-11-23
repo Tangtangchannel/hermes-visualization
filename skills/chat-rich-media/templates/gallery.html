@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+  Template: gallery + key facts (the "subject profile" pattern)
+  Use for: a person, company, place or product that has a face, a place and a few facts.
+
+  Replace:
+    · {{TITLE}} / {{SUBTITLE}} in the header
+    · each <div class="ph"> placeholder with
+        <img class="ph" src="img/your-photo.jpg"
+             data-fb="https://remote-fallback/url.jpg" alt="what is actually in the frame">
+    · the caption, the license label, the four stat cards, the five timeline nodes
+  Keep: the tile grid, the 152px heights, the caption gradient, the rail maths, the breakpoints.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: transparent; color: var(--foreground, #e8e8ee);
+               font-family: inherit; -webkit-font-smoothing: antialiased; }
+  .wrap { padding: 2px 0 14px; }
+
+  .hd { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .hd h3 { margin: 0; font-size: 15px; font-weight: 650; }
+  .hd .sub { font-size: 11.5px; color: var(--muted-foreground, #8b8b9a); }
+  .badge { font-size: 10.5px; padding: 2px 8px; border-radius: 999px; color: var(--accent, #6c8cff);
+           border: 1px solid color-mix(in srgb, var(--accent, #6c8cff) 40%, transparent);
+           background: color-mix(in srgb, var(--accent, #6c8cff) 10%, transparent); }
+
+  .gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .shot { position: relative; margin: 0; border-radius: 12px; overflow: hidden;
+          border: 1px solid var(--border, #2c2c38); background: #101014; }
+  .shot .ph { display: block; width: 100%; height: 152px; object-fit: cover; object-position: center 48%; }
+  .shot.p-portrait .ph { object-position: center top; }   /* never crop a face */
+  /* placeholder block — delete once a real <img> is in place */
+  .ph.placeholder { display: flex; align-items: center; justify-content: center;
+                    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+                    color: rgba(255,255,255,.42);
+                    background: repeating-linear-gradient(45deg, #1b1b22 0 10px, #202028 10px 20px); }
+  .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 10px 8px;
+               font-size: 10.5px; line-height: 1.35; color: #fff;
+               background: linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.45) 55%, transparent);
+               text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+  .shot .lic { position: absolute; top: 8px; right: 8px; font-size: 9.5px; letter-spacing: .03em;
+               padding: 2px 6px; border-radius: 5px; color: #fff; background: rgba(0,0,0,.45); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .stat { border: 1px solid var(--border, #2c2c38); border-radius: 10px; padding: 10px 12px;
+          background: color-mix(in srgb, var(--card, #1a1a22) 55%, transparent); }
+  .stat .k { font-size: 10.5px; margin-bottom: 5px;
+             color: color-mix(in srgb, var(--foreground, #e8e8ee) 52%, transparent); }
+  .stat .v { font-size: 13.5px; font-weight: 650; line-height: 1.25; }
+  .stat .v small { font-size: 11px; font-weight: 400; color: var(--muted-foreground, #8b8b9a); }
+
+  .tl-h { margin: 18px 0 10px; font-size: 12px; font-weight: 600; }
+  .tl { position: relative; padding: 6px 0 10px; }
+  .tl .line { position: absolute; left: 6px; right: 6px; top: 15px; height: 1px;
+              background: color-mix(in srgb, var(--foreground, #e8e8ee) 14%, transparent); }
+  .nodes { display: flex; justify-content: space-between; gap: 6px; position: relative; }
+  .n { flex: 1 1 0; text-align: center; min-width: 0; }
+  .n .dot { width: 9px; height: 9px; border-radius: 50%; margin: 0 auto 9px;
+            border: 2px solid var(--accent, #6c8cff); background: var(--card, #1a1a22); }
+  .n .y { font-size: 11px; font-weight: 620; margin-bottom: 2px; font-variant-numeric: tabular-nums; }
+  .n .t { font-size: 10.5px; line-height: 1.35; color: var(--muted-foreground, #8b8b9a); }
+
+  .note { margin-top: 16px; padding-top: 9px; font-size: 10.5px; line-height: 1.5;
+          color: var(--muted-foreground, #8b8b9a); border-top: 1px dashed var(--border, #2c2c38); }
+
+  @media (max-width: 720px) {
+    .gal { grid-template-columns: 1fr; }
+    .shot .ph { height: 176px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nodes { flex-wrap: wrap; row-gap: 14px; }
+    .n { flex: 1 1 30%; }
+    .tl .line { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd">
+    <h3>{{TITLE}}</h3>
+    <span class="sub">{{SUBTITLE}}</span>
+    <span class="badge">photos · verified</span>
+  </div>
+
+  <div class="gal">
+    <figure class="shot">
+      <div class="ph placeholder">photo 1</div>
+      <span class="lic">CC BY-SA 4.0</span>
+      <figcaption class="cap"><b>Place</b> — what the frame actually shows</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="ph placeholder">photo 2</div>
+      <span class="lic">CC BY-SA 4.0</span>
+      <figcaption class="cap"><b>Product</b> — model, setting</figcaption>
+    </figure>
+    <figure class="shot p-portrait">
+      <div class="ph placeholder">portrait</div>
+      <span class="lic">CC BY 4.0</span>
+      <figcaption class="cap"><b>Person</b> @ venue, year</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Label</div><div class="v">Value</div></div>
+    <div class="stat"><div class="k">Label</div><div class="v">Value<small> · detail</small></div></div>
+    <div class="stat"><div class="k">Label</div><div class="v">Value</div></div>
+    <div class="stat"><div class="k">Label</div><div class="v">Value<small> + detail</small></div></div>
+  </div>
+
+  <div class="tl-h">Five moments that explain it</div>
+  <div class="tl">
+    <div class="line"></div>
+    <div class="nodes">
+      <div class="n"><div class="dot"></div><div class="y">YYYY</div><div class="t">event<br>one line</div></div>
+      <div class="n"><div class="dot"></div><div class="y">YYYY</div><div class="t">event<br>one line</div></div>
+      <div class="n"><div class="dot"></div><div class="y">YYYY</div><div class="t">event<br>one line</div></div>
+      <div class="n"><div class="dot"></div><div class="y">YYYY</div><div class="t">event<br>one line</div></div>
+      <div class="n"><div class="dot"></div><div class="y">YYYY</div><div class="t">event<br>one line</div></div>
+    </div>
+  </div>
+
+  <p class="note">Photos: Wikimedia Commons (CC BY 4.0 / CC BY-SA 4.0) — attribution required, share-alike
+  applies. Replace this line with the real sources.</p>
+</div>
+
+<script>
+  // local image missing → try the remote fallback, so the frame never shows a broken tile
+  document.querySelectorAll('img[data-fb]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      if (!img.dataset.tried) { img.dataset.tried = '1'; img.src = img.dataset.fb; }
+    });
+  });
+</script>
+</body>
+</html>
