@@ -86,6 +86,9 @@ that make a serious answer look like marketing.
 Layout recipes with structure sketches — gallery, mind map, timeline, comparison grid, diagram grid, stat
 board, chart: `references/patterns.md`.
 
+Worked examples with screenshots (a company note, a topology grid, a history mind map): `docs/examples/`
+in the upstream repository.
+
 ## Imagery
 
 Where to search, which license is safe, and how to tell you actually have the right person:
